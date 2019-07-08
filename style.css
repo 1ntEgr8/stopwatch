@@ -1,0 +1,104 @@
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#stopwatch-container {
+    background: #ffffff;
+    height: 95vh;
+    width: 97vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+#stopwatch {
+    display: grid;
+    grid-template-columns: repeat(2, 40vw);
+    grid-column-gap: 1vh;
+}
+
+#time {
+    font-family: 'Roboto Mono', monospace;
+    text-align: center;
+    font-size: 7.25vw;
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 2;
+}
+
+.btn {
+    font-family: 'Rubik', sans-serif;
+    font-size: 3vw;
+    color: white;
+    border-width: 10px;
+    padding: 12px 15px;
+    border-radius: 15px;
+    overflow: visible;
+    cursor: pointer;
+}
+
+.btn:hover {
+    filter: brightness(110%);
+}
+
+.start {
+    background: #34e34b;
+    border-color: #25c43a;
+}
+
+.stop {
+    background: #f54242;
+    border-color: #ff1414;
+}
+
+.reset {
+    background: #ffaa00;
+    border-color: #ff8400;
+}
+
+.lap {
+    background: #b3b3b3;
+    border-color: #707070;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: default;
+    filter: none !important;
+}
+
+.background {
+    background-size: 400% 400%;
+}
+
+.start-background {
+    background: linear-gradient(-45deg, #34e34b, #25c43a);
+}
+
+.stop-background {
+    background: linear-gradient(-45deg, #f54242, #ff1414);
+}
+
+.reset-background {
+    background: linear-gradient(-45deg, #ffaa00, #ff8400);
+}
+
+/* @-webkit-keyframes gradientChange {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@-moz-keyframes gradientChange {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@keyframes gradientChange {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+} */
