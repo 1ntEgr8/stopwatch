@@ -25,8 +25,8 @@ document.body.addEventListener("keyup", resetTimer);
 
 function manageTimer(e) {
     let flag = true;
-    if (event.type == "keyup") {
-        if (event.keyCode !== 32) {
+    if (e.type == "keyup") {
+        if (e.keyCode !== 32) {
             flag = false;
         }
     }
@@ -40,8 +40,9 @@ function manageTimer(e) {
 
 function resetTimer(e) {
     let flag = true;
-    if (event.type == "keyup") {
-        if (event.keyCode !== 13) {
+    if (e.type == "keyup") {
+        console.log("here")
+        if (e.keyCode != 16) {
             flag = false;
         }
     }
