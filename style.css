@@ -8,8 +8,8 @@ body {
 
 #stopwatch-container {
     background: #ffffff;
-    height: 95vh;
-    width: 97vw;
+    height: 93%;
+    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
