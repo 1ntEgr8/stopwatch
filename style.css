@@ -6,14 +6,23 @@ body {
     margin: 0;
 }
 
+td {
+    font-family: 'Roboto Mono', monospace;
+    width: 33.33%;
+    border-bottom: 2px solid gray;
+    padding-top: 15px;
+}
+
 #stopwatch-container {
-    background: #ffffff;
-    height: 93%;
-    width: 95%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #ffffff;
+    height: 80vh;
+    width: 90vw;
     border-radius: 15px;
+    padding: 2rem;
 }
 
 #stopwatch {
@@ -28,6 +37,16 @@ body {
     font-size: 7.25vw;
     grid-row: 1 / span 1;
     grid-column: 1 / span 2;
+}
+
+#lap-times-table {
+    overflow: scroll;
+    width: 80vw;
+}
+
+#lap-times {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .btn {
@@ -87,18 +106,20 @@ body {
     background: linear-gradient(-45deg, #ffaa00, #ff8400);
 }
 
-/* @-webkit-keyframes gradientChange {
-    0%{background-position:96% 0%}
-    50%{background-position:5% 100%}
-    100%{background-position:96% 0%}
+.stopwatch-lap {
+    justify-content: flex-start !important;
 }
-@-moz-keyframes gradientChange {
-    0%{background-position:96% 0%}
-    50%{background-position:5% 100%}
-    100%{background-position:96% 0%}
+
+.lap-time {
+    text-align: center;
 }
-@keyframes gradientChange {
-    0%{background-position:96% 0%}
-    50%{background-position:5% 100%}
-    100%{background-position:96% 0%}
-} */
+
+.positive {
+    font-weight: bold;
+    color: #25c43a;
+}
+
+.negative {
+    font-weight: bold;
+    color: #ff1414;
+}

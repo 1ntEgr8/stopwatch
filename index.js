@@ -4,6 +4,7 @@ const hours = document.getElementById("hours"),
     milliseconds = document.getElementById("milliseconds"),
     startStopButton = document.getElementById("start-stop"),
     resetButton = document.getElementById("reset"),
+    stopwatchContainer = document.getElementById("stopwatch-container"),
     lapTimesContainer = document.getElementById("lap-times");   
 
 let started = false,
@@ -11,7 +12,10 @@ let started = false,
     startTime = 0,
     stopTime = 0,
     timeElapsed = 0,
+    lapTimeStops=[],
+    lapTimes=[],
     timeOnWatch,
+    timeOnWatchms,
     timer;
 
 document.body.classList.add("background");
@@ -41,7 +45,6 @@ function manageTimer(e) {
 function resetTimer(e) {
     let flag = true;
     if (e.type == "keyup") {
-        console.log("here")
         if (e.keyCode != 16) {
             flag = false;
         }
@@ -56,18 +59,16 @@ function resetTimer(e) {
         initialStarted = false,
         startTime = 0,
         stopTime = 0,
-        timeElapsed = 0;
+        timeElapsed = 0,
+        lapTimeStops = [],
+        lapTimes = [];
 
         lapTimesContainer.innerHTML = "";
 
+        toggleLapStyles();
         toggleBtnStyles();
     } else if (flag) {
-        let {hrs, mins, s, ms} = timeOnWatch;
-
-        let time = document.createElement("p");
-        time.innerHTML = `${hrs}:${mins}:${s}:${ms}`;
-
-        lapTimesContainer.appendChild(time);
+        addNewLapTime();
     }
 }
 
@@ -95,7 +96,8 @@ function stopTimer() {
 
 function updateTimer() {
     let currentTime = Date.now() - timeElapsed;
-    timeOnWatch = getTime(currentTime - startTime);
+    timeOnWatchms = currentTime - startTime;
+    timeOnWatch = getTime(timeOnWatchms);
     hours.innerHTML = `${timeOnWatch.hrs}`;
     minutes.innerHTML = `${timeOnWatch.mins}`;
     seconds.innerHTML = `${timeOnWatch.s}`;
@@ -158,5 +160,52 @@ function toggleBtnStyles() {
             document.body.classList.remove("reset-background");
             document.body.classList.add("start-background");
         }
+    }
+}
+
+function addNewLapTime() {
+    lapTimeStops.unshift(timeOnWatchms);
+    if (lapTimeStops.length > 1) {
+        lapTimes.unshift(lapTimeStops[0] - lapTimeStops[1]);
+    } else {
+        lapTimes.unshift(lapTimeStops[0]);
+    }
+
+    let lapTimesNodes = lapTimesContainer.children,
+        lapTime = document.createElement("tr"),
+        number = document.createElement("td"),
+        time = document.createElement("td"),
+        time2 = document.createElement("td"),
+        {hrs, mins, s, ms} = (lapTimes.length <= 1) ? timeOnWatch : getTime(lapTimeStops[0] - lapTimeStops[1]);
+
+    number.innerHTML = "LAP " + (lapTimes.length);
+    time.innerHTML = `${hrs}:${mins}:${s}:${ms}`;
+    if (lapTimes.length > 1) {
+        let deltaT = lapTimes[0] - lapTimes[1],
+            {hrs, mins, s, ms} = getTime(Math.abs(deltaT));
+        if (deltaT > 0) {
+            time2.classList.add("positive");
+            time2.innerHTML = "+ ";
+        } else {
+            time2.classList.add("negative");
+            time2.innerHTML = "- ";
+        }
+        time2.innerHTML += `${hrs}:${mins}:${s}:${ms}`;
+    }
+
+    lapTime.appendChild(number);
+    lapTime.appendChild(time);
+    lapTime.appendChild(time2);
+
+    toggleLapStyles(lapTime);
+    lapTimesContainer.insertBefore(lapTime, lapTimesNodes[0]);
+}
+
+function toggleLapStyles(lapTime=null) {
+    if (!started) {
+        stopwatchContainer.classList.remove("stopwatch-lap");
+    } else {
+        stopwatchContainer.classList.add("stopwatch-lap");
+        lapTime.classList.add("lap-time");
     }
 }
