@@ -1,3 +1,9 @@
+/*
+    TODOS
+        write a formatTime function that takes in a time in milliseconds and returns an appropriate time format
+        write a function that displays keyboard shortcuts when the page is first opened
+*/
+
 const hours = document.getElementById("hours"),
     minutes = document.getElementById("minutes"),
     seconds = document.getElementById("seconds"),
@@ -180,6 +186,7 @@ function addNewLapTime() {
 
     number.innerHTML = "LAP " + (lapTimes.length);
     time.innerHTML = `${hrs}:${mins}:${s}:${ms}`;
+    time.classList.add("neutral");
     if (lapTimes.length > 1) {
         let deltaT = lapTimes[0] - lapTimes[1],
             {hrs, mins, s, ms} = getTime(Math.abs(deltaT));

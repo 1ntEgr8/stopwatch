@@ -8,6 +8,7 @@ body {
 
 td {
     font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
     width: 33.33%;
     border-bottom: 2px solid gray;
     padding-top: 15px;
@@ -122,4 +123,9 @@ td {
 .negative {
     font-weight: bold;
     color: #ff1414;
+}
+
+.neutral {
+    font-weight: bold;
+    color: orange;
 }
